@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/sura/Examen")
 public class ExamenControlador {
@@ -42,6 +44,35 @@ public class ExamenControlador {
                     .status(HttpStatus.BAD_REQUEST)
                     .body(error);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Examen>> consultarExamenes() throws Exception{
+        try{
+            List<Examen> listaConsultada = this.examenServicio.buscarTodosLosExamenes();
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(listaConsultada);
+        }catch (Exception error){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(null);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Examen> editarExamen(Integer id, @RequestBody Examen examen) throws Exception {
+        try{
+            Examen examenRespuesta =  this.examenServicio.editarExamen(id, examen);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(examenRespuesta);
+        }catch (Exception error) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(null);
+        }
+
     }
 
 }

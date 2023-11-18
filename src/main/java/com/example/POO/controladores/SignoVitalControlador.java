@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/sura/SignoVital")
 public class SignoVitalControlador {
@@ -41,6 +43,35 @@ public class SignoVitalControlador {
                     .status(HttpStatus.BAD_REQUEST)
                     .body(error);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<SignoVital>> consultarSignosVitales() throws Exception{
+        try{
+            List<SignoVital> listaConsultada = this.signoVitalServicio.buscarTodosLosSignosVitales();
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(listaConsultada);
+        }catch (Exception error){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(null);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SignoVital> editarSignoVital (Integer id, @RequestBody SignoVital signoVital) throws Exception {
+        try{
+            SignoVital signoVitalRespuesta =  this.signoVitalServicio.editarSignoVital(id, signoVital);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(signoVitalRespuesta);
+        }catch (Exception error) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(null);
+        }
+
     }
 
 }
