@@ -62,7 +62,7 @@ public class AfiliadoControlador {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Afiliado> editarAfiliado (Integer id, @RequestBody Afiliado afiliado) throws Exception {
+    public ResponseEntity<Afiliado> editarAfiliado (@PathVariable Integer id, @RequestBody Afiliado afiliado) throws Exception {
         try{
           Afiliado afiliadoRespuesta =  this.afiliadoServicio.editarAfiliado(id, afiliado);
            return ResponseEntity
@@ -76,6 +76,7 @@ public class AfiliadoControlador {
 
     }
 
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarAfiliado (@PathVariable Integer id) throws Exception{
         try {
             return ResponseEntity

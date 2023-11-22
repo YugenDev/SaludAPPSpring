@@ -75,6 +75,7 @@ public class AfiliadoServicio {
                 throw new Exception(Msj.ERROR_NO_ENCUENTRA.getMensaje());
             }
         }catch (Exception error){
+            System.out.println(error.getMessage());
             throw new Exception(Msj.ERROR_NO_ENCUENTRA.getMensaje());
         }
     }
