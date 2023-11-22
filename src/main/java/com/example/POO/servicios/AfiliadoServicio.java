@@ -81,4 +81,18 @@ public class AfiliadoServicio {
 
     //Borrar afiliado
 
+    public Boolean retirarAfiliado (Integer id) throws Exception{
+        try {
+         Boolean afiliadoEncontrado = this.afiliadoRepositorio.existsById(id);
+            if (afiliadoEncontrado){
+                this.afiliadoRepositorio.deleteById(id);
+                return true;
+            }else{
+                throw new Exception(Msj.ERROR_NO_ENCUENTRA.getMensaje());
+            }
+        }catch (Exception error){
+            throw new Exception(Msj.ERROR_NO_ENCUENTRA.getMensaje());
+        }
+    }
+
 }

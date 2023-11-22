@@ -74,4 +74,17 @@ public class SignoVitalControlador {
 
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminarSignoVital (@PathVariable Integer id) throws Exception{
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.signoVitalServicio.retirarSignoVital(id));
+        }catch (Exception error){
+            return  ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(error.getMessage());
+        }
+    }
+
 }

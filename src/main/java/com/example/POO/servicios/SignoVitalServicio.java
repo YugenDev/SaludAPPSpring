@@ -68,4 +68,18 @@ public class SignoVitalServicio {
         }
     }
 
+    public Boolean retirarSignoVital (Integer id) throws Exception{
+        try {
+            Boolean signoVitalEncontrado = this.signoVitalRepositorio.existsById(id);
+            if (signoVitalEncontrado){
+                this.signoVitalRepositorio.deleteById(id);
+                return true;
+            }else{
+                throw new Exception(Msj.ERROR_NO_ENCUENTRA.getMensaje());
+            }
+        }catch (Exception error){
+            throw new Exception(Msj.ERROR_NO_ENCUENTRA.getMensaje());
+        }
+    }
+
 }

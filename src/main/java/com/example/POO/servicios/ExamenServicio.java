@@ -70,4 +70,18 @@ public class ExamenServicio {
         }
     }
 
+    public Boolean retirarExamen (Integer id) throws Exception{
+        try {
+            Boolean examenEncontrado = this.ExamenRepositorio.existsById(id);
+            if (examenEncontrado){
+                this.ExamenRepositorio.deleteById(id);
+                return true;
+            }else{
+                throw new Exception(Msj.ERROR_NO_ENCUENTRA.getMensaje());
+            }
+        }catch (Exception error){
+            throw new Exception(Msj.ERROR_NO_ENCUENTRA.getMensaje());
+        }
+    }
+
 }
